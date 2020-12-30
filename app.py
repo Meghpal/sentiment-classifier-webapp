@@ -1,11 +1,11 @@
 import os
 import pickle
+import helpers.db as db
 
 from flask import Flask, render_template, send_from_directory, request
-from tensorflow.keras.models import load_model
 from helpers.cleaner import review_cleaner
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder="public", template_folder="views")
 
 vectorizer = pickle.load(open("model/vectorizer_tfidf.h5", "rb"))
 model = pickle.load(open("model/model.h5", "rb"))
@@ -18,19 +18,35 @@ def home():
 
 @app.route("/result.html", methods=["POST"])
 def result():
-    cleaned = review_cleaner(request.form.get("review"))
-    review_bag = vectorizer.transform([cleaned]).toarray()
+    raw_review = request.form.get("review")
+    cleaned_review = review_cleaner(raw_review)
+    review_bag = vectorizer.transform([cleaned_review]).toarray()
     prediction = model.predict(review_bag)
+    pred_string = "Negative sentiment" if prediction[0] == 0 else "Positive sentiment"
 
-    return render_template(
-        "result.html",
-        res="Negative sentiment" if prediction[0] == 0 else "Positive sentiment",
-    )
+    rid = db.add_row(raw_review, pred_string)
+
+    return render_template("result.html", res=pred_string, rid=rid)
 
 
 @app.route("/data.html")
 def data():
-    return render_template("data.html")
+    data_li = db.get_data()
+    return render_template("data.html", data_li=data_li)
+
+
+@app.route("/feedback.html")
+def feedback():
+    feed_li = db.get_feedback_worthy()
+    return render_template("feedback.html", feed_li=feed_li)
+
+
+@app.route("/update", methods=["POST"])
+def update():
+    rid = request.form.get("rid")
+    feedback = request.form.get("feedback")
+
+    return db.update_feedback(rid, feedback)
 
 
 @app.route("/favicon.ico")

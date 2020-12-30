@@ -1,0 +1,21 @@
+{% extends 'components/template.html' %}
+
+{% block title %}Feedback{% endblock %}
+
+{% block header %}Feedback{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+{% endblock %}
+
+{% block js %}
+<script src="{{url_for('static', filename='js/script.js')}}"></script>
+{% endblock %}
+
+{% block content %}
+<ul>
+    {% for elem in feed_li %}
+    <li>{{elem}}</li>
+    {% endfor %}
+</ul>
+{% endblock %}
