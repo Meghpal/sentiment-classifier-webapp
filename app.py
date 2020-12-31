@@ -12,6 +12,7 @@ model = pickle.load(open("model/model.h5", "rb"))
 
 
 @app.route("/")
+@app.route("/home.html")
 def home():
     return render_template("home.html")
 
@@ -36,17 +37,20 @@ def data():
 
 
 @app.route("/feedback.html")
-def feedback():
-    feed_li = db.get_feedback_worthy()
-    return render_template("feedback.html", feed_li=feed_li)
+@app.route("/feedback.html/<submit>")
+def feedback(submit=None):
+    thanks = True if submit == "submit" else False
+    feed_li = db.get_pending_feedback()
+    return render_template("feedback.html", feed_li=feed_li, thanks=thanks)
 
 
 @app.route("/update", methods=["POST"])
 def update():
-    rid = request.form.get("rid")
-    feedback = request.form.get("feedback")
+    data = request.get_json()
+    rid = data["rid"]
+    feedback = data["feedback"]
 
-    return db.update_feedback(rid, feedback)
+    return str(db.update_feedback(rid, feedback))
 
 
 @app.route("/favicon.ico")

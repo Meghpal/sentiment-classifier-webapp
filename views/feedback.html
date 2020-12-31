@@ -5,17 +5,31 @@
 {% block header %}Feedback{% endblock %}
 
 {% block css %}
-<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
 {% endblock %}
 
 {% block js %}
-<script src="{{url_for('static', filename='js/script.js')}}"></script>
+    <script src="{{url_for('static', filename='js/feedback.js')}}"></script>
 {% endblock %}
 
 {% block content %}
-<ul>
-    {% for elem in feed_li %}
-    <li>{{elem}}</li>
-    {% endfor %}
-</ul>
+    {% if feed_li is defined and feed_li %}
+        <ul>
+            {% for elem in feed_li %}
+            <li>
+                <div>{{elem[0]}} {{elem[1]}} {{elem[2]}}</div>
+                <button onclick="update_feedback({{elem[0]}}, 'correct' );">correct</button>
+                <button onclick="update_feedback({{elem[0]}}, 'wrong' );">wrong</button>
+            </li>
+            {% endfor %}
+        </ul>
+        {% if thanks == True %}
+            <div>Thank you for the feedback! Please consider giving feedback for other reviews.</div>
+        {% endif %}
+    {% else %}
+        <div>No more reviews to give feedback on.</div>
+        {% if thanks == True %}
+            <div>Thank you for the feedback!</div>
+        {% endif %}
+    {% endif %}
 {% endblock %}

@@ -1,17 +1,20 @@
 {% extends 'components/template.html' %}
 
-{% block title %}Data{% endblock %}
+{% block title %}Result{% endblock %}
 
-{% block header %}Data{% endblock %}
+{% block header %}Result{% endblock %}
 
 {% block css %}
-<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
 {% endblock %}
 
 {% block js %}
-<script src="{{url_for('static', filename='js/script.js')}}"></script>
+    <script src="{{url_for('static', filename='js/feedback.js')}}"></script>
 {% endblock %}
 
 {% block content %}
-{{res}}
+    {{res}}
+    <div>Is the sentiment correct?</div>
+    <button onclick="update_feedback({{rid}}, 'correct' );">correct</button>
+    <button onclick="update_feedback({{rid}}, 'wrong' );">wrong</button>
 {% endblock %}

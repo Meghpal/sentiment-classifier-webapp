@@ -5,17 +5,21 @@
 {% block header %}Data{% endblock %}
 
 {% block css %}
-<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
 {% endblock %}
 
 {% block js %}
-<script src="{{url_for('static', filename='js/script.js')}}"></script>
+    <script src="{{url_for('static', filename='js/script.js')}}"></script>
 {% endblock %}
 
 {% block content %}
-<ul>
-    {% for elem in data_li %}
-    <li>{{elem}}</li>
-    {% endfor %}
-</ul>
+    {% if data_li is defined and data_li %}
+        <ul>
+            {% for elem in data_li %}
+            <li>{{elem}}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <div>No data</div>
+    {% endif %}
 {% endblock %}

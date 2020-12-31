@@ -11,7 +11,7 @@ initializer.execute(
         REV_ID INTEGER PRIMARY KEY AUTOINCREMENT,
         REVIEW VARCHAR(500) NOT NULL,
         PREDICTION VARCHAR(20) NOT NULL,
-        FEEDBACK VARCHAR(20) NULL
+        FEEDBACK VARCHAR(10) CHECK (FEEDBACK in ('correct','wrong')) NULL
     );
     """
 )
@@ -24,19 +24,26 @@ connection.close()
 def execute(sql_command, fetchAll=False):
     connection = sqlite3.connect("database/reviews.db")
     cursor = connection.cursor()
+    result = ""
 
-    cursor.execute(sql_command)
-    connection.commit()
-    if fetchAll:
-        result = cursor.fetchall()
+    try:
+        cursor.execute(sql_command)
+    except Exception as e:
+        result = "Error: " + str(e)
     else:
-        result = cursor.lastrowid
-    cursor.close()
-    connection.close()
-    return result
+        connection.commit()
+
+        if fetchAll:
+            result = cursor.fetchall()
+        else:
+            result = cursor.lastrowid
+    finally:
+        cursor.close()
+        connection.close()
+        return result
 
 
-def get_feedback_worthy():
+def get_pending_feedback():
     result = execute(
         """
         SELECT * FROM REVIEWS_DATA
