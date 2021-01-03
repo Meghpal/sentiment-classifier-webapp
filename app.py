@@ -9,6 +9,7 @@ app = Flask(__name__, static_folder="public", template_folder="views")
 
 vectorizer = pickle.load(open("model/vectorizer_tfidf.h5", "rb"))
 model = pickle.load(open("model/model.h5", "rb"))
+port = int(os.environ.get("PORT", 5000))
 
 
 @app.route("/")
@@ -62,5 +63,4 @@ def favicon():
     )
 
 
-if __name__ == "__main__":
-    app.run(debug=False)
+app.run(host="0.0.0.0", port=port)
