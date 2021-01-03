@@ -12,10 +12,14 @@
     <script src="{{url_for('static', filename='js/script.js')}}"></script>
 {% endblock %}
 
+{% block nav %}
+<a class="current" href="/">Home</a><a href="/feedback.html">Feedback</a><a href="/data.html">Data</a>
+{% endblock %}
+
 {% block content %}
     <div>Enter random review here</div>
-    <form action="/result.html" method="POST">
-        <input required type="text" name="review" value="" placeholder="Enter" />
-        <button type="submit">Submit</button>
+    <form id="review-box" action="/result.html" method="POST">
+        <textarea name="review" cols="40" rows="5" placeholder="Enter review"></textarea>
+        <button class="btn btn-success" type="submit">Submit</button>
     </form>
 {% endblock %}

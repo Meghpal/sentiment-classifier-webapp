@@ -12,24 +12,30 @@
     <script src="{{url_for('static', filename='js/feedback.js')}}"></script>
 {% endblock %}
 
+{% block nav %}
+<a href="/">Home</a><a class="current" href="/feedback.html">Feedback</a><a href="/data.html">Data</a>
+{% endblock %}
+
 {% block content %}
     {% if feed_li is defined and feed_li %}
-        <ul>
+        <div class="scroller">
             {% for elem in feed_li %}
-            <li>
-                <div>{{elem[0]}} {{elem[1]}} {{elem[2]}}</div>
-                <button onclick="update_feedback({{elem[0]}}, 'correct' );">correct</button>
-                <button onclick="update_feedback({{elem[0]}}, 'wrong' );">wrong</button>
-            </li>
+            <div class="card review-card">
+                <div class="card-header">"{{elem[1]}}" <span class="badge badge-secondary">{{elem[2]}}</span></div>
+                <div class="card-body">
+                    <button class="btn btn-success" onclick="update_feedback({{elem[0]}}, 'correct' );">correct</button>
+                    <button class="btn btn-dark" onclick="update_feedback({{elem[0]}}, 'wrong' );">wrong</button>
+                </div>
+            </div>
             {% endfor %}
-        </ul>
+        </div>
         {% if thanks == True %}
-            <div>Thank you for the feedback! Please consider giving feedback for other reviews.</div>
+            <div class="alle">Thank you for the feedback! Please consider giving feedback for other reviews.</div>
         {% endif %}
     {% else %}
         <div>No more reviews to give feedback on.</div>
         {% if thanks == True %}
-            <div>Thank you for the feedback!</div>
+            <div class="alle">Thank you for the feedback!</div>
         {% endif %}
     {% endif %}
 {% endblock %}

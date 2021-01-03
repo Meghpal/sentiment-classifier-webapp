@@ -12,13 +12,30 @@
     <script src="{{url_for('static', filename='js/script.js')}}"></script>
 {% endblock %}
 
+{% block nav %}
+<a href="/">Home</a><a href="/feedback.html">Feedback</a><a class="current" href="/data.html">Data</a>
+{% endblock %}
+
 {% block content %}
     {% if data_li is defined and data_li %}
-        <ul>
-            {% for elem in data_li %}
-            <li>{{elem}}</li>
-            {% endfor %}
-        </ul>
+        <table class="table scroller">
+            <tbody>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Text</th>
+                    <th scope="col">Prediction</th>
+                    <th scope="col">Feedback</th>
+                </tr>
+                {% for elem in data_li %}
+                <tr>
+                    <td>{{elem[0]}}</div>
+                    <td class="ml-2">"{{elem[1]}}"</div>
+                    <td class="ml-2">{{elem[2]}}</div>
+                    <td class="ml-2">{{elem[3]}}</div>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     {% else %}
         <div>No data</div>
     {% endif %}

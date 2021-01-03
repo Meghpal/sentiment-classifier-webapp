@@ -12,9 +12,15 @@
     <script src="{{url_for('static', filename='js/feedback.js')}}"></script>
 {% endblock %}
 
+{% block nav %}
+<a href="/">Home</a><a href="/feedback.html">Feedback</a><a href="/data.html">Data</a>
+{% endblock %}
+
 {% block content %}
-    {{res}}
-    <div>Is the sentiment correct?</div>
-    <button onclick="update_feedback({{rid}}, 'correct' );">correct</button>
-    <button onclick="update_feedback({{rid}}, 'wrong' );">wrong</button>
+    <div class="alle mb-5 res">{{res}}</div>
+    <div class="mb-2">Is the sentiment correct?</div>
+    <div>
+        <button class = "btn btn-success" onclick="update_feedback({{rid}}, 'correct' );">correct</button>
+        <button class = "btn btn-light" onclick="update_feedback({{rid}}, 'wrong' );">wrong</button>
+    </div>
 {% endblock %}

@@ -1,0 +1,131 @@
+html, body{
+    margin: 0;
+    height: 100%;
+    width: 100%;
+}
+
+body{
+    font-family: 'Inter', sans-serif;
+    background-color: rgb(27, 27, 27);
+    color: white;
+    display: flex;
+    flex-direction: column;
+}
+
+.container-fluid{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    flex: 1;
+}
+
+.scroller {
+    height: 70vh;
+    width: 100%;
+    overflow-y: scroll;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+#review-box{
+    display: flex;
+    flex-direction: column;
+}
+
+#review-box textarea{
+    background-color: rgb(47, 47, 47);
+    color: white;
+    padding: 5px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    box-shadow: inset 0px 0px 10px #0008;
+}
+
+#review-box textarea::placeholder{
+    color: white;
+    opacity: 0.8;
+}
+
+nav{
+    background-color: #198754;
+    height: 50px;
+    display: flex;
+    align-items: center;
+}
+
+nav a{
+    margin-left: 20px;
+    text-decoration: none;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+nav a:hover, nav a:active{
+    color: #fffa;
+    background-color: #0002;
+}
+
+header{
+    padding: 10px;
+}
+
+nav a.current{
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.card-header{
+    color: black;
+}
+
+.card{
+    margin-bottom: 5px;
+}
+
+.badge-secondary{
+    background-color: #6c757d;
+    float: right;
+}
+
+.review-card{
+    min-width: 50vw;
+    max-width: 70vw;
+}
+
+.alle{
+    color: #198754;
+    font-weight: bold;
+}
+
+.table{
+    background-color: rgb(47, 47, 47);
+    border-radius: 5px;
+    color: white;
+}
+
+.card-body{
+    background-color: rgb(47, 47, 47);
+}
+
+.card, .card-body{
+    border:0;
+}
+
+.card-header{
+    background-color: rgb(32, 32, 32);
+    color: white;
+}
+
+.res{
+    background-color: rgb(47, 47, 47);
+    padding: 20px;
+    padding-left: 50px;
+    padding-right: 50px;
+    border-radius: 5px;
+    font-size: larger;
+}
