@@ -1,6 +1,4 @@
 let update_feedback = (rid, feedback) => {
-    this.innerText = "ASD"
-    console.log(this)
     fetch("/update", {
         headers: {
             'Accept': 'application/json',

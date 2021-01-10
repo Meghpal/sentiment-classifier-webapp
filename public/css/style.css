@@ -129,3 +129,27 @@ nav a.current{
     border-radius: 5px;
     font-size: larger;
 }
+
+.btn{
+    position: relative;
+    overflow: hidden;
+}
+
+.btn span.ripple{
+    position: absolute;
+    border-radius: 50%;
+    transform: scale(0);
+    animation: ripple 600ms linear;
+    background-color: rgba(255, 255, 255, 0.4);
+}
+
+.btn-light span.ripple{
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+@keyframes ripple {
+    to {
+      transform: scale(4);
+      opacity: 0;
+    }
+}

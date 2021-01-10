@@ -9,6 +9,7 @@
 {% endblock %}
 
 {% block js %}
+    <script src="{{url_for('static', filename='js/script.js')}}"></script>
     <script src="{{url_for('static', filename='js/feedback.js')}}"></script>
 {% endblock %}
 
@@ -23,8 +24,8 @@
             <div class="card review-card">
                 <div class="card-header">"{{elem[1]}}" <span class="badge badge-secondary">{{elem[2]}}</span></div>
                 <div class="card-body">
-                    <button class="btn btn-success" onclick="update_feedback({{elem[0]}}, 'correct' );">correct</button>
-                    <button class="btn btn-dark" onclick="update_feedback({{elem[0]}}, 'wrong' );">wrong</button>
+                    <button class="btn btn-success" onclick="update_feedback({{elem[0]}}, 'correct');">correct</button>
+                    <button class="btn btn-dark" onclick="update_feedback({{elem[0]}}, 'wrong');">wrong</button>
                 </div>
             </div>
             {% endfor %}
