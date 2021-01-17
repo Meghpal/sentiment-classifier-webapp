@@ -6,9 +6,10 @@ createRipple = event => {
     const radius = diameter / 2;
     const circle = document.createElement("span");
     circle.style.width = circle.style.height = `${diameter}px`;
-    circle.style.left = `${event.clientX - (button.offsetLeft + radius)}px`;
-    circle.style.top = `${event.clientY - (button.offsetTop + radius)}px`;
+    circle.style.left = `${event.offsetX - radius}px`;
+    circle.style.top = `${event.offsetY - radius}px`;
     circle.classList.add("ripple");
+    console.log(event)
     const ripple = button.getElementsByClassName("ripple")[0];
 
     if (ripple) {
